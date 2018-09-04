@@ -32,12 +32,14 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
         //Set sensor delay
         mSensorManager.registerListener(sensorEventListener, mHeartRateSensor, mSensorManager.SENSOR_DELAY_FASTEST);
+
+        heartrateText.setText("Heartrate should show up here...");
     }
 
     @Override
     public void onSensorChanged(SensorEvent event){
         if (event.sensor.getType() == Sensor.TYPE_HEART_RATE){
-            String heartrate = "" + (int) event.values[0];
+            String heartrate = "Heartrate: " + (int) event.values[0];
             heartrateText.setText(heartrate);
         }else{
             heartrateText.setText("Sensor not working...");
@@ -46,6 +48,11 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        heartrateText.setText("Accuracy changed!");
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
