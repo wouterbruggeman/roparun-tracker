@@ -1,12 +1,16 @@
 package nl.hr.roparun_tracker;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
+import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.view.View;
 
 public class MainActivity extends WearableActivity implements SensorEventListener{
 
@@ -17,6 +21,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     Sensor mStepCounterSensor;
 
     SensorEventListener sensorEventListener;
+    Button secondButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +40,20 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         mStepCounterSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
         //Set sensor delay
+
         mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(this, mStepCounterSensor, SensorManager.SENSOR_DELAY_FASTEST);
+        mSensorManager.registerListener(sensorEventListener, mHeartRateSensor, mSensorManager.SENSOR_DELAY_FASTEST);
+
+        //Create button and listener
+        secondButton = findViewById(R.id.testButton);
+        secondButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToSecondWindow = new Intent(getApplicationContext(), secondActivity.class);
+                startActivity(goToSecondWindow);
+            }
+        });
+
     }
 
     @Override
