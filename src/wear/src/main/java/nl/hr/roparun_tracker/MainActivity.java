@@ -11,12 +11,13 @@ import android.widget.TextView;
 public class MainActivity extends WearableActivity implements SensorEventListener{
 
     TextView heartrateText;
-    TextView pedometerText;
+    TextView stepCounterText;
     SensorManager mSensorManager;
     Sensor mHeartRateSensor;
     Sensor mStepCounterSensor;
 
     SensorEventListener sensorEventListener;
+    int calibrationStepCount = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
         //Create text views
         heartrateText = findViewById(R.id.heartrateTextId);
-        pedometerText = findViewById(R.id.stepCounterTextId);
+        stepCounterText = findViewById(R.id.stepCounterTextId);
 
         //Create sensor managers etc.
         mSensorManager = ((SensorManager) getSystemService(SENSOR_SERVICE));
@@ -43,12 +44,17 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     public void onSensorChanged(SensorEvent event){
         switch(event.sensor.getType()){
             case Sensor.TYPE_HEART_RATE:
-                String heartrate = "Heartrate: " + (int) event.values[0];
-                heartrateText.setText(heartrate);
+                String heartrateString = "Heartrate: " + (int) event.values[0];
+                heartrateText.setText(heartrateString);
                 break;
             case Sensor.TYPE_STEP_COUNTER:
-                String stepCount = "Step Count: " + (int) event.values[0];
-                pedometerText.setText(stepCount);
+                int stepCount = (int) event.values[0];
+                if(calibrationStepCount == -1){
+                    calibrationStepCount = stepCount;
+                }
+
+                String stepCountString = "Step Count: " + (stepCount - calibrationStepCount);
+                stepCounterText.setText(stepCountString);
                 break;
             default:
                 break;
