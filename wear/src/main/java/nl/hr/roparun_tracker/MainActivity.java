@@ -14,6 +14,8 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     TextView pedometerText;
     SensorManager mSensorManager;
     Sensor mHeartRateSensor;
+    Sensor mStepCounterSensor;
+
     SensorEventListener sensorEventListener;
 
     @Override
@@ -25,15 +27,15 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
         //Create text views
         heartrateText = findViewById(R.id.heartrateTextId);
-        pedometerText = findViewById(R.id.pedometerTextId);
+        pedometerText = findViewById(R.id.stepCounterTextId);
 
         //Create sensor managers etc.
         mSensorManager = ((SensorManager) getSystemService(SENSOR_SERVICE));
         mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
-        mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mStepCounterSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
         //Set sensor delay
-        mSensorManager.registerListener(sensorEventListener, mHeartRateSensor, mSensorManager.SENSOR_DELAY_FASTEST);
+        mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -46,6 +48,8 @@ public class MainActivity extends WearableActivity implements SensorEventListene
             case Sensor.TYPE_STEP_COUNTER:
                 String stepCount = "Step Count: " + (int) event.values[0];
                 pedometerText.setText(stepCount);
+                break;
+            default:
                 break;
         }
     }
