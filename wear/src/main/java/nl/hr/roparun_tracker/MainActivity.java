@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class MainActivity extends WearableActivity implements SensorEventListener{
 
     TextView heartrateText;
+    TextView pedometerText;
     SensorManager mSensorManager;
     Sensor mHeartRateSensor;
     SensorEventListener sensorEventListener;
@@ -22,8 +23,9 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         // Enables Always-on
         setAmbientEnabled();
 
-        //Create text view
+        //Create text views
         heartrateText = findViewById(R.id.heartrateTextId);
+        pedometerText = findViewById(R.id.pedometerTextId);
 
         //Create sensor managers etc.
         mSensorManager = ((SensorManager) getSystemService(SENSOR_SERVICE));
@@ -32,17 +34,19 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
         //Set sensor delay
         mSensorManager.registerListener(sensorEventListener, mHeartRateSensor, mSensorManager.SENSOR_DELAY_FASTEST);
-
-        heartrateText.setText("Heartrate should show up here...");
     }
 
     @Override
     public void onSensorChanged(SensorEvent event){
-        if (event.sensor.getType() == Sensor.TYPE_HEART_RATE){
-            String heartrate = "Heartrate: " + (int) event.values[0];
-            heartrateText.setText(heartrate);
-        }else{
-            heartrateText.setText("Sensor not working...");
+        switch(event.sensor.getType()){
+            case Sensor.TYPE_HEART_RATE:
+                String heartrate = "Heartrate: " + (int) event.values[0];
+                heartrateText.setText(heartrate);
+                break;
+            case Sensor.TYPE_STEP_COUNTER:
+                String stepCount = "Step Count: " + (int) event.values[0];
+                pedometerText.setText(stepCount);
+                break;
         }
     }
 

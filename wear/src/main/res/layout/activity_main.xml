@@ -15,9 +15,26 @@
         android:padding="@dimen/inner_frame_layout_padding"
         app:boxedEdges="all">
 
-        <TextView
-            android:id="@+id/heartrateTextId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/heartrateTextId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="heartrate"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/pedometerTextId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="step count"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="27dp" />
+        </android.support.constraint.ConstraintLayout>
+
     </FrameLayout>
 </android.support.wear.widget.BoxInsetLayout>
