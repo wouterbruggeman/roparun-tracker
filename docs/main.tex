@@ -1,0 +1,41 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{subfiles}
+\usepackage{import}
+\usepackage[subpreambles=true]{standalone}
+
+\graphicspath{{images}{../images/}}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Documentatie Roparun Tracker}
+\rfoot{Pagina \thepage}
+\date{\today}
+\renewcommand{\contentsname}{Inhoudsopgave}
+
+\title{\textbf{Documentatie Roparun Tracker}}
+\author{
+	Paul de Hek, 0941736 \\
+	Rick van Vonderen, 0945444 \\
+	Quentin Hoogwerf, 0929493 \\
+	Wouter Bruggeman, 0943071 \\
+}
+
+\begin{document}
+	\maketitle
+	\thispagestyle{empty}
+	\newpage
+
+	\tableofcontents
+	\setcounter{page}{1}
+	\newpage
+
+	\section{Inleiding}
+	\import{sections/}{Inleiding}
+	\newpage
+
+	\section{Code eisen}
+	\import{sections/}{CodeEisen}
+	\newpage
+\end{document}

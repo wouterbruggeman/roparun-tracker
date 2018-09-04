@@ -36,6 +36,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
         //Set sensor delay
         mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mStepCounterSensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     @Override
