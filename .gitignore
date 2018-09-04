@@ -6,3 +6,9 @@
 /build
 /captures
 .externalNativeBuild
+
+*.log
+*.pdf
+*.aux
+*.toc
+*.sta
