@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/wouter/Projects/School/roparun-tracker/code/wear/build/intermediates/incremental/mergeDebugResources/merged.dir/values-as/values-as.xml",
+            "map": [
+                {
+                    "source": "/home/wouter/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-rc02.aar/a74c8cbeda7d61ac9b8470870cd8aac2/res/values-as/values-as.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                },
+                {
+                    "source": "/home/wouter/.gradle/caches/transforms-1/files-1.1/wear-28.0.0-rc02.aar/60ba5e84dbad897c7ffc6f21ba4047aa/res/values-as/values-as.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,163",
+                        "endColumns": "107,116",
+                        "endOffsets": "158,275"
+                    },
+                    "to": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "156,264",
+                        "endColumns": "107,116",
+                        "endOffsets": "259,376"
+                    }
+                }
+            ]
+        }
+    ]
+}
