@@ -1,6 +1,5 @@
 package nl.hr.roparun_tracker;
 
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -8,9 +7,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.view.View;
 
 public class MainActivity extends WearableActivity implements SensorEventListener{
 
@@ -46,13 +43,13 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
         //Create button and listener
         secondButton = findViewById(R.id.testButton);
-        secondButton.setOnClickListener(new View.OnClickListener() {
+        /*secondButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent goToSecondWindow = new Intent(getApplicationContext(), secondActivity.class);
                 startActivity(goToSecondWindow);
             }
-        });
+        });*/
 
     }
 
@@ -60,17 +57,10 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     public void onSensorChanged(SensorEvent event){
         switch(event.sensor.getType()){
             case Sensor.TYPE_HEART_RATE:
-                String heartrateString = "Heartrate: " + (int) event.values[0];
-                heartrateText.setText(heartrateString);
+                this.showHeartRate((int)event.values[0]);
                 break;
             case Sensor.TYPE_STEP_COUNTER:
-                int stepCount = (int) event.values[0];
-                if(calibrationStepCount == -1){
-                    calibrationStepCount = stepCount;
-                }
-
-                String stepCountString = "Step Count: " + (stepCount - calibrationStepCount);
-                stepCounterText.setText(stepCountString);
+                this.showStepCount((int)event.values[0]);
                 break;
             default:
                 break;
@@ -85,5 +75,23 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    //Show the heartrate
+    private void showHeartRate(int heartrate){
+        String heartrateString = "Heartrate: " + heartrate;
+        heartrateText.setText(heartrateString);
+    }
+
+    //Show the stepCount
+    private void showStepCount(int stepCount) {
+        //Calibrate the value
+        if(calibrationStepCount == -1){
+            calibrationStepCount = stepCount;
+        }
+
+        //Show the value
+        String stepCountString = "Step Count: " + (stepCount - calibrationStepCount);
+        stepCounterText.setText(stepCountString);
     }
 }
