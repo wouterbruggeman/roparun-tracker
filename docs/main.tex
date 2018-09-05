@@ -1,10 +1,15 @@
 \documentclass[12pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[dutch]{babel}
+\usepackage{hyperref}
+\usepackage{color}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{subfiles}
 \usepackage{import}
 \usepackage[subpreambles=true]{standalone}
+% Skip to next paragraph on whiteline
+\usepackage{parskip}
 
 \graphicspath{{images}{../images/}}
 \pagestyle{fancy}
@@ -13,6 +18,13 @@
 \rfoot{Pagina \thepage}
 \date{\today}
 \renewcommand{\contentsname}{Inhoudsopgave}
+
+\definecolor{blue}{rgb}{0,0.5,1}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = blue,
+	urlcolor = blue,
+}
 
 \title{\textbf{Documentatie Roparun Tracker}}
 \author{
