@@ -94,9 +94,10 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         /*if(calibrationStepCount == -1){
             calibrationStepCount = stepCount;
         }*/
+        //stepCount = stepCount - calibrationStepCount;
 
         //Show the value
-        String stepCountString = "Step Count: " + (stepCount);
+        String stepCountString = "Step Count: " + stepCount;
         stepCounterText.setText(stepCountString);
     }
 }
