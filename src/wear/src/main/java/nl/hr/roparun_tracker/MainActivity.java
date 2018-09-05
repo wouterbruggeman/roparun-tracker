@@ -34,12 +34,14 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
         //Create sensor managers etc.
         mSensorManager = ((SensorManager) getSystemService(SENSOR_SERVICE));
-        mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE); mStepCounterSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
+        mStepCounterSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
         //Set sensor delay
 
-        mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(sensorEventListener, mHeartRateSensor, mSensorManager.SENSOR_DELAY_FASTEST);
+        mSensorManager.registerListener(this, mHeartRateSensor, mSensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(sensorEventListener, mStepCounterSensor, mSensorManager.SENSOR_DELAY_FASTEST);
+
 
         //Create button and listener
         secondButton = findViewById(R.id.testButton);
@@ -50,6 +52,9 @@ public class MainActivity extends WearableActivity implements SensorEventListene
                 startActivity(goToSecondWindow);
             }
         });*/
+
+        this.showHeartRate(0);
+        this.showStepCount(0);
 
     }
 
@@ -86,12 +91,12 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     //Show the stepCount
     private void showStepCount(int stepCount) {
         //Calibrate the value
-        if(calibrationStepCount == -1){
+        /*if(calibrationStepCount == -1){
             calibrationStepCount = stepCount;
-        }
+        }*/
 
         //Show the value
-        String stepCountString = "Step Count: " + (stepCount - calibrationStepCount);
+        String stepCountString = "Step Count: " + (stepCount);
         stepCounterText.setText(stepCountString);
     }
 }
