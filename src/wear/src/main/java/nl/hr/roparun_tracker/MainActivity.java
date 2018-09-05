@@ -4,10 +4,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
 import android.support.wearable.activity.WearableActivity;
 import android.widget.Button;
 import android.widget.TextView;
+import android.os.Vibrator;
 
 public class MainActivity extends WearableActivity implements SensorEventListener{
 
@@ -26,7 +29,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Enables Always-on
-        setAmbientEnabled();
+        //setAmbientEnabled();
 
         //Create text views
         heartrateText = findViewById(R.id.heartrateTextId);
@@ -98,5 +101,14 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         //Show the value
         String stepCountString = "Step Count: " + stepCount;
         stepCounterText.setText(stepCountString);
+
+        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(250,VibrationEffect.DEFAULT_AMPLITUDE));
+        }else{
+            v.vibrate(250);
+        }
+
+
     }
 }
