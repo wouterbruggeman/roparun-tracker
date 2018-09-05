@@ -1,5 +1,6 @@
 package nl.hr.roparun_tracker;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -8,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.support.wearable.activity.WearableActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.os.Vibrator;
@@ -45,16 +47,21 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         mSensorManager.registerListener(this, mHeartRateSensor, mSensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, mStepCounterSensor, mSensorManager.SENSOR_DELAY_FASTEST);
 
-
         //Create button and listener
         secondButton = findViewById(R.id.testButton);
-        /*secondButton.setOnClickListener(new View.OnClickListener() {
+        secondButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goToSecondWindow = new Intent(getApplicationContext(), secondActivity.class);
-                startActivity(goToSecondWindow);
+                //create vibrator
+                Vibrator vibrator = ((Vibrator) getSystemService(VIBRATOR_SERVICE));
+
+                //create vibration pattern
+                VibrationEffect simpleVibe = VibrationEffect.createOneShot(50,VibrationEffect.DEFAULT_AMPLITUDE);
+
+                //call vibration
+                vibrator.vibrate(simpleVibe);
             }
-        });*/
+        });
 
         this.showHeartRate(-1);
         this.showStepCount(-1);
