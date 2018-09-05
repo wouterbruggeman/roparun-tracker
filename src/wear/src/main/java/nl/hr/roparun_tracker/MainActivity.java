@@ -101,14 +101,5 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         //Show the value
         String stepCountString = "Step Count: " + stepCount;
         stepCounterText.setText(stepCountString);
-
-        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(250,VibrationEffect.DEFAULT_AMPLITUDE));
-        }else{
-            v.vibrate(250);
-        }
-
-
     }
 }
