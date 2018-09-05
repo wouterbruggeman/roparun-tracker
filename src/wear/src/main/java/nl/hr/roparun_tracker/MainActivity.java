@@ -40,7 +40,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         //Set sensor delay
 
         mSensorManager.registerListener(this, mHeartRateSensor, mSensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(sensorEventListener, mStepCounterSensor, mSensorManager.SENSOR_DELAY_FASTEST);
+        mSensorManager.registerListener(this, mStepCounterSensor, mSensorManager.SENSOR_DELAY_FASTEST);
 
 
         //Create button and listener
@@ -53,9 +53,8 @@ public class MainActivity extends WearableActivity implements SensorEventListene
             }
         });*/
 
-        this.showHeartRate(0);
-        this.showStepCount(0);
-
+        this.showHeartRate(-1);
+        this.showStepCount(-1);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        heartrateText.setText("Accuracy changed!");
+        //heartrateText.setText("Accuracy changed!");
     }
 
     @Override
@@ -91,10 +90,10 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     //Show the stepCount
     private void showStepCount(int stepCount) {
         //Calibrate the value
-        /*if(calibrationStepCount == -1){
+        if(calibrationStepCount == -1){
             calibrationStepCount = stepCount;
-        }*/
-        //stepCount = stepCount - calibrationStepCount;
+        }
+        stepCount = stepCount - calibrationStepCount;
 
         //Show the value
         String stepCountString = "Step Count: " + stepCount;
