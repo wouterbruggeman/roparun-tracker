@@ -4,10 +4,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
 import android.support.wearable.activity.WearableActivity;
 import android.widget.Button;
 import android.widget.TextView;
+import android.os.Vibrator;
 
 public class MainActivity extends WearableActivity implements SensorEventListener{
 
@@ -26,7 +29,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Enables Always-on
-        setAmbientEnabled();
+        //setAmbientEnabled();
 
         //Create text views
         heartrateText = findViewById(R.id.heartrateTextId);
@@ -40,7 +43,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         //Set sensor delay
 
         mSensorManager.registerListener(this, mHeartRateSensor, mSensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(sensorEventListener, mStepCounterSensor, mSensorManager.SENSOR_DELAY_FASTEST);
+        mSensorManager.registerListener(this, mStepCounterSensor, mSensorManager.SENSOR_DELAY_FASTEST);
 
 
         //Create button and listener
@@ -53,9 +56,8 @@ public class MainActivity extends WearableActivity implements SensorEventListene
             }
         });*/
 
-        this.showHeartRate(0);
-        this.showStepCount(0);
-
+        this.showHeartRate(-1);
+        this.showStepCount(-1);
     }
 
     @Override
@@ -74,7 +76,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        heartrateText.setText("Accuracy changed!");
+        //heartrateText.setText("Accuracy changed!");
     }
 
     @Override
@@ -91,12 +93,13 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     //Show the stepCount
     private void showStepCount(int stepCount) {
         //Calibrate the value
-        /*if(calibrationStepCount == -1){
+        if(calibrationStepCount == -1){
             calibrationStepCount = stepCount;
-        }*/
+        }
+        stepCount = stepCount - calibrationStepCount;
 
         //Show the value
-        String stepCountString = "Step Count: " + (stepCount);
+        String stepCountString = "Step Count: " + stepCount;
         stepCounterText.setText(stepCountString);
     }
 }
