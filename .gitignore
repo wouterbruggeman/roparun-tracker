@@ -8,8 +8,12 @@ src/.idea/*
 /captures
 .externalNativeBuild
 
+*.fls
+*.out
 *.log
 *.pdf
 *.aux
 *.toc
 *.sta
+*.synctex.gz
+*.fdb_latexmk
